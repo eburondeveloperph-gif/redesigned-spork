@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Beatrice - AI Conversation Agent</title>
 
     <!-- PWA Meta Tags -->
@@ -459,24 +458,24 @@
         </div>
 
         <div id="config-container" class="compat-hidden">
-            <select id="voice-select">
+            <select id="voice-select" title="Voice selection">
                 <option value="Puck">Puck</option>
                 <option value="Charon">Charon</option>
                 <option value="Kore">Kore</option>
                 <option value="Fenrir">Fenrir</option>
                 <option value="Fenrir">Fenrir</option>
             </select>
-            <input type="number" id="sample-rate-input">
-            <textarea id="system-instruction"></textarea>
-            <button id="apply-config"></button>
-            <button class="preset-button" data-preset="friendly"></button>
-            <button class="preset-button" data-preset="professional"></button>
-            <button class="preset-button" data-preset="tired"></button>
+            <input type="number" id="sample-rate-input" placeholder="Sample rate" title="Sample rate">
+            <textarea id="system-instruction" placeholder="System instruction" title="System instruction"></textarea>
+            <button id="apply-config" aria-label="Apply configuration"></button>
+            <button class="preset-button" data-preset="friendly" aria-label="Friendly preset"></button>
+            <button class="preset-button" data-preset="professional" aria-label="Professional preset"></button>
+            <button class="preset-button" data-preset="tired" aria-label="Tired preset"></button>
         </div>
         <!-- Compatibility elements used by the existing app logic. Hidden from the modern UI. -->
-        <button id="theme-toggle" class="compat-hidden"></button>
-        <button id="config-toggle" class="compat-hidden"></button>
-        <div class="logs-wrapper compat-hidden hidden"><button id="toggle-logs"></button>
+        <button id="theme-toggle" class="compat-hidden" aria-label="Toggle theme"></button>
+        <button id="config-toggle" class="compat-hidden" aria-label="Toggle configuration"></button>
+        <div class="logs-wrapper compat-hidden hidden"><button id="toggle-logs" aria-label="Toggle logs"></button>
             <div id="logs-container"></div>
         </div>
 

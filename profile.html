@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="app-container">
         <header class="app-header">
@@ -49,11 +51,13 @@
                         </div>
                         <div class="profile-row">
                             <div class="profile-row-label"><i class="ph ph-envelope-simple"></i><span>Email</span></div>
-                            <input type="email" id="profile-email" class="profile-row-input" readonly>
+                            <input type="email" id="profile-email" class="profile-row-input" placeholder="Email"
+                                title="Email" readonly>
                         </div>
                         <div class="profile-row">
                             <div class="profile-row-label"><i class="ph ph-cake"></i><span>Birthday</span></div>
-                            <input type="date" id="profile-birthday" class="profile-row-input">
+                            <input type="date" id="profile-birthday" class="profile-row-input" placeholder="Birthday"
+                                title="Birthday">
                         </div>
                     </div>
 
@@ -82,4 +86,5 @@
     <script src="js/config/env.js"></script>
     <script src="js/profile.js" type="module"></script>
 </body>
+
 </html>
