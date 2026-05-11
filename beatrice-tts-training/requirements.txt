@@ -1,0 +1,41 @@
+# Beatrice TTS Training Pipeline Dependencies
+# Install: pip install -r requirements.txt
+
+# Core ML / Audio
+numpy>=1.24.0
+torch>=2.0.0
+torchaudio>=2.0.0
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# TTS / Kokoro
+kokoro>=0.3.0
+phonemizer>=3.2.0
+espeak-ng-loader>=0.1.0
+
+# Data processing
+pandas>=2.0.0
+scipy>=1.10.0
+
+# Training utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+wandb>=0.15.0
+
+# Evaluation
+jiwer>=3.0.0
+
+# Backend API
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Export
+onnx>=1.14.0
+onnxruntime>=1.15.0
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+ruff>=0.0.280

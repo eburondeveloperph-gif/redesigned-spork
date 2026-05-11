@@ -1,0 +1,49 @@
+# German (de-DE) Evaluation Phrases
+# Test categories: greetings, business_phrases, numbers, dates, currency, city_names
+
+# Greetings
+Ja, ich bin da.
+Ich höre zu.
+Guten Morgen, wie kann ich Ihnen helfen?
+Guten Abend, schön Sie zu sprechen.
+
+# Business phrases
+Ich habe die Rechnung vorbereitet.
+Ich habe die Zahlung gefunden.
+Ihre Bestellung ist unterwegs.
+Die Lieferung kommt morgen an.
+Vielen Dank für Ihre Geduld.
+
+# Numbers and company info
+Die Umsatzsteuer-Identifikationsnummer lautet DE123456789.
+Die Steuernummer ist 0123/456/78901.
+Der Betrag von 1.234,56 Euro wurde auf Ihr Konto gutgeschrieben.
+
+# City names
+Der Zug nach Antwerpen fährt um 14 Uhr 32 ab.
+Ich komme aus Brüssel, aber wohne in Gent.
+Mecheln und Löwen sind schöne Städte.
+Das Meer ist nah bei Ostende.
+
+# Payment terms
+Die Zahlung wurde bestätigt.
+Der Betrag von 1.234,56 Euro ist eingegangen.
+Möchten Sie per Überweisung oder mit Payconiq bezahlen?
+Die Rechnung beträgt 5.432,10 Euro inklusive Mehrwertsteuer.
+
+# Dates and currency
+Die Frist ist der 15.03.2026.
+Der Preis beträgt 120,50 Euro für das Paket.
+Rufen Sie uns unter 030 123 45 67 für weitere Informationen an.
+
+# Assistant phrases
+Wobei kann ich Ihnen behilflich sein?
+Ich verstehe. Ich kümmere mich darum.
+Einen Moment, ich suche das für Sie heraus.
+Gibt es noch etwas, wobei ich helfen kann?
+
+# Complex sentences
+Die Umsatzsteuererklärung für das zweite Quartal muss vor dem 20. Juli abgegeben werden.
+Das Unternehmen hat einen neuen Peppol-Anbindungspunkt für die elektronische Rechnungsstellung aktiviert.
+Möchten Sie dieses Angebot digital über das itsme-Portal erhalten?
+Der bpost-Lieferdienst hat das Paket bei den Nachbarn abgegeben.

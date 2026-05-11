@@ -1,0 +1,52 @@
+# Flemish / Dutch (Belgium) Evaluation Phrases
+# Test categories: greetings, business_phrases, vat_numbers, company_numbers, city_names, payment_terms
+
+# Greetings
+Ja, ik ben er.
+Ik luister.
+Goedemorgen, hoe kan ik u helpen?
+Dag, fijn u te spreken.
+
+# Business phrases
+Ik heb de factuur voorbereid.
+Ik heb de betaling gevonden.
+Uw bestelling is onderweg.
+De levering komt morgen aan.
+Hartelijk dank voor uw geduld.
+
+# VAT numbers
+Het BTW-nummer is BE 0123.456.789.
+De BTW-identificatie luidt BE 0987.654.321.
+
+# Company numbers
+Het ondernemingsnummer is 0123.456.789.
+Het KBO-nummer vindt u op de factuur.
+
+# City names
+De trein naar Antwerpen vertrekt om 14 uur 32.
+Ik kom uit Brussel, maar woon in Gent.
+Mechelen en Leuven zijn mooie steden.
+De zee is dicht bij Oostende.
+
+# Payment terms
+De betaling via Bancontact is gelukt.
+Het bedrag van €1.234,56 staat op uw rekening.
+Wilt u per overschrijving of via Payconiq betalen?
+De factuur bedraagt €5.432,10 inclusief btw.
+
+# Dates and currency
+De deadline is 15/03/2026.
+De prijs is €120,50 voor het pakket.
+Bel ons op 03 123 45 67 voor meer info.
+
+# Assistant phrases
+Waarmee kan ik u van dienst zijn?
+Ik begrijp het. Ik ga dat voor u regelen.
+Een ogenblik geduld, ik zoek het op.
+Is er nog iets waarmee ik kan helpen?
+
+# Compound and complex sentences
+De btw-aangifte voor het tweede kwartaal moet voor 20 juli ingediend worden.
+Het bedrijf heeft een nieuw Peppol-koppelpunt geactiveerd voor elektronische facturatie.
+Wilt u deze offerte digitaal ontvangen via het itsme-portaal?
+De bpost-leveringsdienst heeft het pakket afgegeven bij de buren.

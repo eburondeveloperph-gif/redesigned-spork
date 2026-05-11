@@ -1,0 +1,115 @@
+# Kokoro Dutch / Flemish (Belgium) TTS Training Config
+# Milestone 3 — Flemish Custom Training
+
+model:
+  base_checkpoint: "hexgrad/Kokoro-82M"
+  output_name: "kokoro-nl-BE-beatrice"
+  device: "auto"
+
+data:
+  language: "nl-BE"
+  speaker_id: "beatrice_nl_be_001"
+  raw_dir: "datasets/raw/nl-BE"
+  processed_dir: "datasets/processed/nl-BE"
+  manifest_path: "datasets/manifests/nl-BE_manifest.json"
+  
+  target_sample_rate: 24000
+  target_channels: 1
+  target_bit_depth: 16
+  max_duration_seconds: 15.0
+  min_duration_seconds: 1.0
+  
+  train_ratio: 0.85
+  val_ratio: 0.10
+  test_ratio: 0.05
+  
+  augment: false
+  pitch_shift_range: [-1.5, 1.5]
+  speed_range: [0.95, 1.05]
+
+training:
+  batch_size: 16
+  learning_rate: 2.0e-4
+  num_epochs: 250  # More epochs for custom language
+  warmup_epochs: 15
+  gradient_clip_val: 1.0
+  
+  save_every_n_epochs: 10
+  keep_last_n_checkpoints: 5
+  
+  log_every_n_steps: 50
+  sample_every_n_epochs: 5
+  num_sample_texts: 5
+  
+  optimizer: "adamw"
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  
+  scheduler: "cosine_with_restarts"
+  eta_min: 1.0e-6
+  
+  mel_loss_weight: 1.0
+  dur_loss_weight: 0.5
+  pitch_loss_weight: 0.5
+
+phonemization:
+  backend: "custom"
+  # Flemish uses Dutch G2P but with Belgian pronunciation variants
+  language_code: "nl"
+  custom_phonemizer_path: "phonemizers/dutch/nl_be_phonemizer.py"
+  preserve_punctuation: true
+  stress_marks: false
+  
+  # Belgian-specific pronunciation overrides
+  pronunciation_dict: "phonemizers/dutch/pronunciation_dict.json"
+
+normalization:
+  module: "phonemizers.dutch.normalize_nl_be"
+  handle_numbers: true
+  handle_dates: true
+  handle_currency: true
+  handle_phone_numbers: true
+  handle_abbreviations: true
+  handle_vat_numbers: true
+  handle_company_numbers: true
+  # Flemish-specific
+  handle_belgian_terms: true
+  diminutive_expansion: false  # keep -je/-tje as-is in text
+
+evaluation:
+  test_phrases_path: "eval/nl-BE.txt"
+  metrics:
+    - "mel_cepstral_distortion"
+    - "fundamental_frequency_rmse"
+    - "word_error_rate"
+  naturalness_scale: 1-5
+  intelligibility_scale: 1-5
+  speaker_similarity_scale: 1-5
+  
+  # Flemish-specific test categories
+  test_categories:
+    - "greetings"
+    - "business_phrases"
+    - "vat_numbers"
+    - "company_numbers"
+    - "city_names"
+    - "payment_terms"
+
+export:
+  format: "onnx"
+  include_voicepack: true
+  sample_rate: 24000
+  quantization: false
+
+metadata:
+  version: "0.1.0"
+  status: "experimental"
+  description: "Beatrice Flemish/Dutch (Belgium) voice based on Kokoro-82M"
+  created_by: "Hermes CLI Agent"
+  license: "Apache-2.0"
+  notes: |
+    Flemish (nl-BE) is distinct from nl-NL in pronunciation of:
+    - g/ch (softer in Flemish)
+    - r (trilled in Flemish vs uvular in Netherlands)
+    - Diminutives (-ke vs -je)
+    - Belgian city names and business terminology

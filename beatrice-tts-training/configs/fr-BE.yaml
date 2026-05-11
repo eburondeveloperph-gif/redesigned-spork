@@ -1,0 +1,102 @@
+# Kokoro French (Belgium) TTS Training Config
+# Milestone 1 — French MVP
+
+model:
+  base_checkpoint: "hexgrad/Kokoro-82M"
+  output_name: "kokoro-fr-BE-beatrice"
+  device: "auto"  # cuda, cpu, or auto
+
+data:
+  language: "fr-BE"
+  speaker_id: "beatrice_fr_be_001"
+  raw_dir: "datasets/raw/fr-BE"
+  processed_dir: "datasets/processed/fr-BE"
+  manifest_path: "datasets/manifests/fr-BE_manifest.json"
+  
+  # Audio processing
+  target_sample_rate: 24000
+  target_channels: 1  # mono
+  target_bit_depth: 16
+  max_duration_seconds: 15.0
+  min_duration_seconds: 1.0
+  
+  # Dataset split
+  train_ratio: 0.85
+  val_ratio: 0.10
+  test_ratio: 0.05
+  
+  # Augmentation (light — keep voice natural)
+  augment: false
+  pitch_shift_range: [-1.5, 1.5]  # semitones
+  speed_range: [0.95, 1.05]
+
+training:
+  batch_size: 16
+  learning_rate: 2.0e-4
+  num_epochs: 200
+  warmup_epochs: 10
+  gradient_clip_val: 1.0
+  
+  # Checkpointing
+  save_every_n_epochs: 10
+  keep_last_n_checkpoints: 5
+  
+  # Logging
+  log_every_n_steps: 50
+  sample_every_n_epochs: 5
+  num_sample_texts: 5
+  
+  # Optimizer
+  optimizer: "adamw"
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  
+  # Scheduler
+  scheduler: "cosine_with_restarts"
+  eta_min: 1.0e-6
+  
+  # Loss weights
+  mel_loss_weight: 1.0
+  dur_loss_weight: 0.5
+  pitch_loss_weight: 0.5
+
+phonemization:
+  backend: "espeak"  # espeak, phonemizer, or custom
+  language_code: "fr"
+  preserve_punctuation: true
+  stress_marks: false
+
+normalization:
+  module: "phonemizers.french.normalize_fr_be"
+  handle_numbers: true
+  handle_dates: true
+  handle_currency: true
+  handle_phone_numbers: true
+  handle_abbreviations: true
+
+evaluation:
+  test_phrases_path: "eval/fr-BE.txt"
+  metrics:
+    - "mel_cepstral_distortion"
+    - "fundamental_frequency_rmse"
+    - "word_error_rate"
+  
+  # Human eval criteria
+  naturalness_scale: 1-5
+  intelligibility_scale: 1-5
+  speaker_similarity_scale: 1-5
+
+export:
+  format: "onnx"  # onnx, pt, or both
+  include_voicepack: true
+  sample_rate: 24000
+  
+  # Quantization for lighter deployment
+  quantization: false  # int8 or dynamic
+
+metadata:
+  version: "0.1.0"
+  status: "beta"
+  description: "Beatrice French (Belgium) voice based on Kokoro-82M"
+  created_by: "Hermes CLI Agent"
+  license: "Apache-2.0"

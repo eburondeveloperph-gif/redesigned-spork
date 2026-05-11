@@ -1,0 +1,49 @@
+# French (Belgium) Evaluation Phrases
+# Test categories: greetings, business_phrases, numbers, dates, currency, city_names
+
+# Greetings
+Oui, je suis là.
+Je vous écoute.
+Bonjour, comment puis-je vous aider?
+Bonsoir, ravi de vous parler.
+
+# Business phrases
+J'ai préparé la facture.
+J'ai trouvé le paiement.
+Votre commande est en route.
+La livraison arrive demain.
+Merci beaucoup pour votre patience.
+
+# Numbers and company info
+Le numéro d'entreprise belge est 0123.456.789.
+Le numéro de TVA est BE 0123.456.789.
+Le montant de 1.234,56 euros est crédité sur votre compte.
+
+# City names
+Le train vers Anvers part à quatorze heures trente-deux.
+Je viens de Bruxelles mais j'habite à Gand.
+Malines et Louvain sont de belles villes.
+La mer est proche d'Ostende.
+
+# Payment terms
+Le paiement Bancontact a été confirmé.
+Le montant de 1.234,56 euros est bien reçu.
+Préférez-vous payer par virement ou via Payconiq?
+La facture s'élève à 5.432,10 euros TTC.
+
+# Dates and currency
+La date limite est le 15/03/2026.
+Le prix est de 120,50 euros pour le forfait.
+Appelez le 02 123 45 67 pour plus d'informations.
+
+# Assistant phrases
+Comment puis-je vous être utile?
+Je comprends. Je vais m'en occuper.
+Un instant, je cherche cela pour vous.
+Y a-t-il autre chose en quoi je peux vous aider?
+
+# Complex sentences
+La déclaration TVA pour le deuxième trimestre doit être déposée avant le 20 juillet.
+L'entreprise a activé un nouveau point d'accès Peppol pour la facturation électronique.
+Souhaitez-vous recevoir ce devis numériquement via le portail itsme?
+Le service de livraison bpost a remis le colis chez les voisins.
