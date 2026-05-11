@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Settings</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel settings-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Settings</span>
+                    <button id="settings-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll">
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-persona">
+                                <i class="ph-duotone ph-user-circle-gear"></i>
+                            </span>
+                            Persona
+                        </h3>
+                        <p class="settings-hint">Tell your agent who you are and how you want to be addressed.</p>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Your name</span>
+                            <input type="text" id="setting-user-name" placeholder="What should I call you?"
+                                autocomplete="off">
+                        </label>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Agent name</span>
+                            <input type="text" id="setting-agent-name" placeholder="e.g. Eburon, Aria, Nova..."
+                                autocomplete="off">
+                        </label>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-behavior">
+                                <i class="ph-duotone ph-sparkle"></i>
+                            </span>
+                            Behavior
+                        </h3>
+                        <p class="settings-hint">How should the agent interact with you? Tone, style, quirks — anything
+                            goes.</p>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Persona &amp; tone</span>
+                            <textarea id="setting-persona" rows="5"
+                                placeholder="e.g. Warm, witty, and concise. Speaks like a thoughtful friend. Avoids jargon. Uses casual language."></textarea>
+                        </label>
+
+                        <div class="settings-presets">
+                            <button class="persona-preset" data-persona="warm">Warm</button>
+                            <button class="persona-preset" data-persona="professional">Professional</button>
+                            <button class="persona-preset" data-persona="playful">Playful</button>
+                            <button class="persona-preset" data-persona="concise">Concise</button>
+                        </div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-google">
+                                <i class="ph-duotone ph-google-logo"></i>
+                            </span>
+                            Google Services
+                        </h3>
+                        <p class="settings-hint">Connect Google services for enhanced automation capabilities.</p>
+
+                        <div id="google-permissions" class="google-permissions">
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-envelope"></i>
+                                    <span>Gmail</span>
+                                </div>
+                                <div class="permission-status" id="gmail-status">Checking...</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-google-drive-logo"></i>
+                                    <span>Drive</span>
+                                </div>
+                                <div class="permission-status" id="drive-status">Checking...</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-calendar"></i>
+                                    <span>Calendar</span>
+                                </div>
+                                <div class="permission-status" id="calendar-status">Checking...</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-check-square"></i>
+                                    <span>Tasks</span>
+                                </div>
+                                <div class="permission-status" id="tasks-status">Checking...</div>
+                            </div>
+                        
+                        </div>
+                        
+                        <h4 class="permissions-subtitle">Browser Permissions</h4>
+                        <div id="browser-permissions" class="google-permissions">
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-microphone"></i>
+                                    <span>Microphone</span>
+                                </div>
+                                <div class="permission-status" id="mic-permission-status">Unknown</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-video-camera"></i>
+                                    <span>Camera</span>
+                                </div>
+                                <div class="permission-status" id="camera-permission-status">Unknown</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-screencast"></i>
+                                    <span>Screen Share</span>
+                                </div>
+                                <div class="permission-status" id="screen-permission-status">Ready</div>
+                            </div>
+                        </div>
+
+                        <button id="google-reauth-btn" class="google-reauth">
+                            <i class="ph ph-arrows-clockwise"></i>
+                            <span>Re-authorize Google Services</span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/settings.js" type="module"></script>
+</body>
+</html>

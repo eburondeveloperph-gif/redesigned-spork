@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Profile</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel profile-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Profile</span>
+                    <button id="profile-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll profile-scroll">
+                    <section class="profile-id">
+                        <div class="profile-avatar-wrap">
+                            <img id="profile-avatar" class="profile-avatar" src="" alt="Avatar">
+                            <button id="profile-avatar-edit" class="profile-avatar-edit" aria-label="Change avatar">
+                                <i class="ph-fill ph-camera"></i>
+                            </button>
+                            <input type="file" id="profile-avatar-input" accept="image/*" hidden>
+                        </div>
+                        <div id="profile-display-name" class="profile-display-name"></div>
+                        <div id="profile-email-display" class="profile-email-display"></div>
+                    </section>
+
+                    <div class="profile-list">
+                        <div class="profile-row">
+                            <div class="profile-row-label"><i class="ph ph-user"></i><span>Display name</span></div>
+                            <input type="text" id="profile-name" class="profile-row-input" placeholder="Add"
+                                autocomplete="off">
+                        </div>
+                        <div class="profile-row">
+                            <div class="profile-row-label"><i class="ph ph-envelope-simple"></i><span>Email</span></div>
+                            <input type="email" id="profile-email" class="profile-row-input" readonly>
+                        </div>
+                        <div class="profile-row">
+                            <div class="profile-row-label"><i class="ph ph-cake"></i><span>Birthday</span></div>
+                            <input type="date" id="profile-birthday" class="profile-row-input">
+                        </div>
+                    </div>
+
+                    <div class="profile-block">
+                        <div class="profile-block-head"><i class="ph ph-quotes"></i><span>Bio</span></div>
+                        <textarea id="profile-bio" class="profile-bio" rows="3"
+                            placeholder="A short line about you — the agent uses this for context."></textarea>
+                    </div>
+
+                    <div class="profile-block">
+                        <div class="profile-block-head"><i class="ph ph-sparkle"></i><span>Interests</span></div>
+                        <input type="text" id="profile-interest-input" class="profile-interest-input"
+                            placeholder="Type and press Enter">
+                        <div id="profile-interests" class="interest-chips"></div>
+                    </div>
+
+                    <button id="profile-signout" class="profile-signout">
+                        <i class="ph ph-sign-out"></i>
+                        <span>Sign out</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/profile.js" type="module"></script>
+</body>
+</html>

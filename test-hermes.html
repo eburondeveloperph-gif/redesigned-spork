@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hermes Agent Test</title>
+</head>
+<body>
+    <h1>Hermes Agent Connection Test</h1>
+    <div id="output"></div>
+    
+    <script src="js/config/env.js"></script>
+    <script type="module">
+        import { hermesAgent } from './js/services/hermes-agent.js';
+        
+        const output = document.getElementById('output');
+        
+        function log(message) {
+            output.innerHTML += `<p>${message}</p>`;
+            console.log(message);
+        }
+        
+        async function testHermesAgent() {
+            log('Starting Hermes Agent connection test...');
+            
+            try {
+                // Initialize
+                log('Initializing Hermes Agent...');
+                const result = await hermesAgent.initialize();
+                log('Initialization result: ' + JSON.stringify(result, null, 2));
+                
+                // Get status
+                log('Getting status...');
+                const status = await hermesAgent.getStatus();
+                log('Status: ' + JSON.stringify(status, null, 2));
+                
+                if (status.connected) {
+                    log('✓ Hermes Agent connected successfully!');
+                } else {
+                    log('✗ Hermes Agent connection failed');
+                }
+            } catch (error) {
+                log('Error: ' + error.message);
+                console.error(error);
+            }
+        }
+        
+        testHermesAgent();
+    </script>
+</body>
+</html>

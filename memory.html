@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Memory</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel memory-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Memory</span>
+                    <button id="memory-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll memory-scroll">
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-memory">
+                                <i class="ph-duotone ph-brain"></i>
+                            </span>
+                            Long-term Memories
+                        </h3>
+                        <p class="settings-hint">View and manage long-term memories, conversation context, and important information stored across sessions.</p>
+
+                        <div id="memory-list" class="memory-list">
+                            <div class="memory-empty">
+                                <i class="ph ph-brain"></i>
+                                <p>No memories stored yet</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-add">
+                                <i class="ph-duotone ph-plus"></i>
+                            </span>
+                            Add Memory
+                        </h3>
+                        <p class="settings-hint">Manually add important information to your memory.</p>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Memory type</span>
+                            <select id="memory-type">
+                                <option value="preference">Preference</option>
+                                <option value="context">Context</option>
+                                <option value="decision">Decision</option>
+                                <option value="topic">Topic</option>
+                            </select>
+                        </label>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Memory content</span>
+                            <textarea id="memory-content" rows="4" placeholder="Enter the memory details"></textarea>
+                        </label>
+
+                        <button id="memory-add" class="settings-action-btn">
+                            <i class="ph ph-plus"></i>
+                            <span>Add Memory</span>
+                        </button>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-sync">
+                                <i class="ph-duotone ph-arrows-clockwise"></i>
+                            </span>
+                            Memory Sync
+                        </h3>
+                        <p class="settings-hint">Sync memories across sessions for continuity.</p>
+
+                        <button id="memory-sync" class="settings-action-btn">
+                            <i class="ph ph-arrows-clockwise"></i>
+                            <span>Sync Memories</span>
+                        </button>
+
+                        <div id="memory-sync-status" class="memory-sync-status"></div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/memory.js" type="module"></script>
+</body>
+</html>

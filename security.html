@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Security</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel security-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Re-authenticate</span>
+                    <button id="security-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll security-scroll">
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-security">
+                                <i class="ph-duotone ph-shield-check"></i>
+                            </span>
+                            Google Authentication
+                        </h3>
+                        <p class="settings-hint">Re-authorize Google services for enhanced automation capabilities.</p>
+
+                        <div class="google-auth-center">
+                            <div class="google-icon-large">
+                                <svg width="48" height="48" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"
+                                    aria-hidden="true">
+                                    <path fill="#4285F4"
+                                        d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                                    <path fill="#34A853"
+                                        d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                                    <path fill="#FBBC05"
+                                        d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" />
+                                    <path fill="#EA4335"
+                                        d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <button id="re-auth-google" class="re-auth-btn">
+                            <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path fill="#4285F4"
+                                    d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                                <path fill="#34A853"
+                                    d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                                <path fill="#FBBC05"
+                                    d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" />
+                                <path fill="#EA4335"
+                                    d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                            </svg>
+                            <span>Re-authorize with Google</span>
+                        </button>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-permissions">
+                                <i class="ph-duotone ph-key"></i>
+                            </span>
+                            Service Permissions
+                        </h3>
+                        <p class="settings-hint">Check and manage your Google service permissions.</p>
+
+                        <div id="google-permissions" class="google-permissions">
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-envelope"></i>
+                                    <span>Gmail</span>
+                                </div>
+                                <div class="permission-status" id="gmail-status">Checking...</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-google-drive-logo"></i>
+                                    <span>Drive</span>
+                                </div>
+                                <div class="permission-status" id="drive-status">Checking...</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-calendar"></i>
+                                    <span>Calendar</span>
+                                </div>
+                                <div class="permission-status" id="calendar-status">Checking...</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-list-checks"></i>
+                                    <span>Tasks</span>
+                                </div>
+                                <div class="permission-status" id="tasks-status">Checking...</div>
+                            </div>
+                        
+                        </div>
+                        
+                        <h4 class="permissions-subtitle">Browser Permissions</h4>
+                        <div id="browser-permissions" class="google-permissions">
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-microphone"></i>
+                                    <span>Microphone</span>
+                                </div>
+                                <div class="permission-status" id="mic-permission-status">Unknown</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-video-camera"></i>
+                                    <span>Camera</span>
+                                </div>
+                                <div class="permission-status" id="camera-permission-status">Unknown</div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-info">
+                                    <i class="ph ph-screencast"></i>
+                                    <span>Screen Share</span>
+                                </div>
+                                <div class="permission-status" id="screen-permission-status">Ready</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-info">
+                                <i class="ph-duotone ph-info"></i>
+                            </span>
+                            Security Information
+                        </h3>
+                                <i class="ph-duotone ph-info"></i>
+                            </span>
+                            Security Information
+                        </h3>
+                        <p class="settings-hint">Learn about security and authentication.</p>
+
+                        <div class="security-info">
+                            <p>Your Google authentication is used to access Gmail, Drive, Calendar, and Tasks services. Re-authorizing refreshes your access tokens and ensures continued access to these services.</p>
+                            <p>All authentication is handled securely through Google's OAuth 2.0 protocol.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/security.js" type="module"></script>
+</body>
+</html>

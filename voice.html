@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Settings - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Voice Settings</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel voice-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Choose Your Hero Voice</span>
+                    <button id="voice-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll voice-scroll">
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-voice">
+                                <i class="ph-duotone ph-speaker-high"></i>
+                            </span>
+                            Voice Selection
+                        </h3>
+                        <p class="settings-hint">Select a superhero voice to customize how Beatrice sounds.</p>
+
+                        <div class="voice-grid">
+                            <button class="voice-card" data-voice="Fenrir">
+                                <div class="voice-card-icon">
+                                    <i class="ph-duotone ph-lightning"></i>
+                                </div>
+                                <div class="voice-card-name">Wonder Woman</div>
+                            </button>
+                            <button class="voice-card" data-voice="Charon">
+                                <div class="voice-card-icon">
+                                    <i class="ph-duotone ph-bat"></i>
+                                </div>
+                                <div class="voice-card-name">Batman</div>
+                            </button>
+                            <button class="voice-card" data-voice="Fenrir">
+                                <div class="voice-card-icon">
+                                    <i class="ph-duotone ph-hammer"></i>
+                                </div>
+                                <div class="voice-card-name">Thor</div>
+                            </button>
+                            <button class="voice-card" data-voice="Kore">
+                                <div class="voice-card-icon">
+                                    <i class="ph-duotone ph-spider"></i>
+                                </div>
+                                <div class="voice-card-name">Black Widow</div>
+                            </button>
+                            <button class="voice-card" data-voice="Puck">
+                                <div class="voice-card-icon">
+                                    <i class="ph-duotone ph-webhook"></i>
+                                </div>
+                                <div class="voice-card-name">Spider-Man</div>
+                            </button>
+                            <button class="voice-card" data-voice="Zeus">
+                                <div class="voice-card-icon">
+                                    <i class="ph-duotone ph-sun"></i>
+                                </div>
+                                <div class="voice-card-name">Superman</div>
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/voice.js" type="module"></script>
+</body>
+
+</html>

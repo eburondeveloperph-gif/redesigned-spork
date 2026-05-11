@@ -1,0 +1,11 @@
+{
+  "name": "beatrice-static",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "env": "node scripts/generate-env.mjs",
+    "build": "node scripts/generate-env.mjs",
+    "dev": "node scripts/generate-env.mjs && python3 -m http.server 3000"
+  }
+}

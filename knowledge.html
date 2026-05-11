@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Knowledge Base</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel knowledge-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Knowledge Base</span>
+                    <button id="knowledge-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll knowledge-scroll">
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-kb">
+                                <i class="ph-duotone ph-books"></i>
+                            </span>
+                            Upload Documents
+                        </h3>
+                        <p class="settings-hint">Upload text, Markdown, JSON, CSV, PDF, or DOCX files. Indexed text is used by Beatrice on the main chat page.</p>
+
+                        <button id="kb-upload-btn" class="kb-upload">
+                            <i class="ph ph-upload-simple"></i>
+                            <span>Upload files</span>
+                        </button>
+                        <input type="file" id="kb-upload-input" multiple
+                            accept=".txt,.md,.json,.csv,application/pdf,text/*,.docx" hidden>
+
+                        <div id="kb-list" class="kb-list"></div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-search">
+                                <i class="ph-duotone ph-magnifying-glass"></i>
+                            </span>
+                            Search Knowledge
+                        </h3>
+                        <p class="settings-hint">Search through your uploaded documents.</p>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Search query</span>
+                            <input type="text" id="kb-search" placeholder="Enter search terms" autocomplete="off">
+                        </label>
+
+                        <div id="kb-search-results" class="kb-search-results"></div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/knowledge.js" type="module"></script>
+</body>
+</html>

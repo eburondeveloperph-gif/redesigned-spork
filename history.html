@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation History - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Conversation History</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel history-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Conversation History</span>
+                    <button id="history-new-session" class="settings-save-btn">
+                        <i class="ph ph-plus"></i>
+                        <span>New</span>
+                    </button>
+                </div>
+
+                <div class="settings-scroll history-scroll">
+                    <div id="history-sessions" class="history-sessions">
+                        <!-- Sessions will be dynamically added here -->
+                    </div>
+
+                    <div id="history-empty" class="history-empty" hidden>
+                        <i class="ph ph-clock-counter-clockwise"></i>
+                        <p>No conversation history yet</p>
+                        <button id="history-start-chat" class="history-start-btn">Start a conversation</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/history.js" type="module"></script>
+</body>
+</html>

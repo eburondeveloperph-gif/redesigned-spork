@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call - Beatrice</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1 class="app-title">Call</h1>
+            </div>
+            <div class="header-right">
+                <button id="back-button" class="btn-back">
+                    <i class="ph ph-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-panel call-panel" aria-hidden="false">
+                <div class="settings-header">
+                    <span class="settings-title">Make a Call</span>
+                    <button id="call-save" class="settings-save-btn">Save</button>
+                </div>
+
+                <div class="settings-scroll call-scroll">
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-call">
+                                <i class="ph-duotone ph-phone-call"></i>
+                            </span>
+                            Call Preparation
+                        </h3>
+                        <p class="settings-hint">Prepare for a call with talking points and opening lines.</p>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Who to call</span>
+                            <input type="text" id="call-recipient" placeholder="Enter name or number"
+                                autocomplete="off">
+                        </label>
+
+                        <label class="settings-field">
+                            <span class="settings-label">Discussion topic</span>
+                            <textarea id="call-topic" rows="3" placeholder="What do you want to discuss?"></textarea>
+                        </label>
+
+                        <button id="call-prepare" class="settings-action-btn">
+                            <i class="ph ph-lightning"></i>
+                            <span>Prepare Call</span>
+                        </button>
+
+                        <div id="call-result" class="call-result" hidden>
+                            <h4>Talking Points</h4>
+                            <div id="call-talking-points" class="call-talking-points"></div>
+                            <h4>Opening Line</h4>
+                            <div id="call-opening-line" class="call-opening-line"></div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-contacts">
+                                <i class="ph-duotone ph-users"></i>
+                            </span>
+                            Contacts Sync
+                        </h3>
+                        <p class="settings-hint">Sync your phone contacts to easily select recipients for calls.</p>
+
+                        <button id="sync-contacts" class="settings-action-btn">
+                            <i class="ph ph-arrows-clockwise"></i>
+                            <span>Sync Contacts</span>
+                        </button>
+
+                        <div id="contacts-status" class="contacts-status"></div>
+
+                        <div id="contacts-list" class="contacts-list">
+                            <div class="contacts-empty">
+                                <i class="ph ph-users"></i>
+                                <p>No contacts synced yet</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="settings-section">
+                        <h3 class="settings-section-title">
+                            <span class="settings-icon-tile tile-history">
+                                <i class="ph-duotone ph-clock-counter-clockwise"></i>
+                            </span>
+                            Recent Calls
+                        </h3>
+                        <p class="settings-hint">View your recent call preparations.</p>
+
+                        <div id="call-history" class="call-history">
+                            <div class="call-history-empty">
+                                <i class="ph ph-phone-x"></i>
+                                <p>No recent calls</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config/env.js"></script>
+    <script src="js/call.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Beatrice - AI Conversation Agent</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#120101">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Beatrice">
+    <link rel="apple-touch-icon" href="assets/logo/logo.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app" class="app-container">
+        <div class="media-layer" id="mediaLayer">
+            <div id="video-container" class="media-preview" style="display:none;">
+                <video id="preview" playsinline autoplay muted></video>
+                <button id="stop-video" class="hidden-control" aria-label="Stop camera"></button>
+            </div>
+            <div id="screen-container" class="media-preview" style="display:none;">
+                <video id="screen-preview" playsinline autoplay muted></video>
+                <button class="close-button hidden-control" aria-label="Stop screen"></button>
+            </div>
+        </div>
+        <div class="media-overlay"></div>
+
+        <div class="pip-window" id="pipWindow"></div>
+
+        <header class="app-header">
+            <div class="header-info">
+                <span class="ai-name">Eburon AI</span>
+                <div class="visualizer" id="audio-visualizer" aria-label="AI audio visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div id="input-audio-visualizer" class="sr-only-visualizer">
+                    <div class="audio-bar"></div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="flip-camera-button" class="btn-flip-header hidden" aria-label="Flip camera">
+                    <i class="ph ph-camera-rotate"></i>
+                </button>
+                <button id="connect-button" class="btn-disconnect">
+                    <i class="ph-fill ph-phone-x"></i>
+                    <span>Connect</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="skills-rail" id="skills-rail" aria-label="Quick skills">
+            <div class="skills-row" data-row="1">
+                <button class="skill-chip" data-skill="content"
+                    data-prompt="Help me create a piece of engaging content. Ask me what topic, format (post, blog, video script, caption), tone, and target audience, then draft it.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-pen-nib-straight"></i></span><span
+                        class="skill-label">Content</span>
+                </button>
+                <button class="skill-chip" data-skill="image-gen"
+                    data-prompt="Generate an image for me. Ask me for the subject, style, mood, aspect ratio, and any specific details, then create the image.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-image"></i></span><span class="skill-label">Image
+                        Gen</span>
+                </button>
+                <button class="skill-chip" data-skill="video-gen"
+                    data-prompt="Generate a video for me. Ask me for the subject, style, duration, and visual preferences, then create the video.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-video-camera"></i></span><span
+                        class="skill-label">Video Gen</span>
+                </button>
+                <button class="skill-chip" data-skill="song-gen"
+                    data-prompt="Generate a song for me. Ask me for the genre, mood, theme, and style, then create the song.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-music-notes"></i></span><span
+                        class="skill-label">Song Gen</span>
+                </button>
+                <button class="skill-chip" data-skill="speak"
+                    data-prompt="Convert text to speech. Ask me for the text to convert and the voice style, then generate the audio.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-speaker-high"></i></span><span
+                        class="skill-label">Speak</span>
+                </button>
+                <button class="skill-chip" data-skill="transcribe"
+                    data-prompt="Transcribe audio to text. Ask me for the audio content or description, then convert it to text.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-microphone"></i></span><span
+                        class="skill-label">Transcribe</span>
+                </button>
+                <button class="skill-chip" data-skill="gmail"
+                    data-prompt="Help me send a Gmail. Ask for the recipient, subject, tone, and key points, then draft the email and a subject line ready to copy.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-paper-plane-tilt"></i></span><span
+                        class="skill-label">Email</span>
+                </button>
+                <button class="skill-chip" data-skill="document"
+                    data-prompt="Help me create a document. Ask for the type (report, proposal, resume, brief), purpose, audience, and key sections, then draft it with proper structure.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-file-text"></i></span><span
+                        class="skill-label">Document</span>
+                </button>
+                <button class="skill-chip" data-skill="ride"
+                    data-prompt="Help me book a ride. Ask for pickup location, destination, ride type (economy, comfort, XL), and time, then summarize the booking details.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-car-profile"></i></span><span
+                        class="skill-label">Ride</span>
+                </button>
+                <button class="skill-chip" data-skill="whatsapp"
+                    data-prompt="Help me send a WhatsApp message. Ask for the recipient, message content, and any attachments, then draft the message ready to send.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-whatsapp-logo"></i></span><span
+                        class="skill-label">WhatsApp</span>
+                </button>
+                <button class="skill-chip" data-skill="messenger"
+                    data-prompt="Help me send a Messenger message. Ask for the recipient, message content, and any attachments, then draft the message ready to send.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-facebook-messenger-logo"></i></span><span
+                        class="skill-label">Messenger</span>
+                </button>
+                <button class="skill-chip" data-skill="meeting"
+                    data-prompt="Schedule a meeting. Ask for participants, purpose, preferred date/time window, and duration, then draft a meeting invite with agenda.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-calendar-dots"></i></span><span
+                        class="skill-label">Meeting</span>
+                </button>
+                <button class="skill-chip" data-skill="reminder"
+                    data-prompt="Set a reminder for me. Ask what to remind me about, when (date and time), and how often, then confirm the reminder details.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-bell-ringing"></i></span><span
+                        class="skill-label">Reminder</span>
+                </button>
+                <button class="skill-chip" data-skill="translate"
+                    data-prompt="Translate text for me. Ask what text I want translated and to which language, then provide the translation plus a quick pronunciation note.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-translate"></i></span><span
+                        class="skill-label">Translate</span>
+                </button>
+                <button class="skill-chip" data-skill="summarize"
+                    data-prompt="Summarize something for me. Ask what content (text, link, document) I want summarized and the desired length, then provide a clear, structured summary.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-sparkle"></i></span><span
+                        class="skill-label">Summary</span>
+                </button>
+            </div>
+            <div class="skills-row" data-row="2">
+                <button class="skill-chip" data-skill="profile"
+                    data-prompt="Open my profile. Show my name, avatar, account details, recent activity, and connected services, with quick links to edit each section.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-user-circle"></i></span><span
+                        class="skill-label">Profile</span>
+                </button>
+                <button class="skill-chip" data-skill="settings"
+                    data-prompt="Open settings. Show my preferences for voice, theme, notifications, privacy, and connected accounts, with toggles to change each one.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-gear-six"></i></span><span
+                        class="skill-label">Settings</span>
+                </button>
+                <button class="skill-chip" data-skill="history"
+                    data-prompt="Open conversation history. Show all past conversations organized by sessions, with ability to create new sessions and continue previous discussions.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-clock-counter-clockwise"></i></span><span
+                        class="skill-label">History</span>
+                </button>
+                <button class="skill-chip" id="voice-button" data-skill="voice"
+                    data-prompt="Choose your voice style. Select from different hero voices to customize how Beatrice sounds.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-speaker-high"></i></span><span
+                        class="skill-label">Voice</span>
+                </button>
+                <button class="skill-chip" data-skill="call"
+                    data-prompt="Help me make a call. Ask who I want to call and what I want to discuss, then prepare talking points and a brief opening line.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-phone-call"></i></span><span
+                        class="skill-label">Call</span>
+                </button>
+                <button class="skill-chip" data-skill="knowledge"
+                    data-prompt="Open knowledge base. Upload and manage documents your agent can reference in conversations.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-books"></i></span><span
+                        class="skill-label">Knowledge</span>
+                </button>
+                <button class="skill-chip" data-skill="memory"
+                    data-prompt="Open memory system. View and manage long-term memories, conversation context, and important information stored across sessions.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-brain"></i></span><span
+                        class="skill-label">Memory</span>
+                </button>
+                <button class="skill-chip" data-skill="security"
+                    data-prompt="Re-authenticate and manage security settings. Connect or reconnect Google services and manage authentication.">
+                    <span class="skill-glyph"><i class="ph-duotone ph-shield-check"></i></span><span
+                        class="skill-label">Security</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="feature-page" class="feature-page" aria-hidden="true">
+            <header class="feature-page-header">
+                <button id="feature-page-back" class="feature-back-btn" type="button" aria-label="Back to home">
+                    <i class="ph ph-arrow-left"></i>
+                </button>
+                <div class="feature-title-wrap">
+                    <span id="feature-page-kicker" class="feature-kicker">Workspace</span>
+                    <h2 id="feature-page-title">Page</h2>
+                </div>
+                <button id="feature-page-close" class="feature-back-btn" type="button" aria-label="Close page">
+                    <i class="ph ph-x"></i>
+                </button>
+            </header>
+            <main class="feature-page-scroll">
+                <section class="feature-hero">
+                    <div id="feature-page-glyph" class="feature-hero-glyph">
+                        <i class="ph-duotone ph-squares-four"></i>
+                    </div>
+                    <p id="feature-page-subtitle" class="feature-page-subtitle"></p>
+                </section>
+                <div id="feature-page-body" class="feature-page-body"></div>
+            </main>
+        </div>
+
+        <div id="text-streaming-area" class="chat-container">
+            <div id="conversation-container" class="conversation-container">
+                <div class="conversation-message ai">
+                    <div class="message-text">Hello! I am connected..
+                        Ready to automate a task?</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-dock">
+            <div class="input-wrapper">
+                <div id="attachment-chips" class="attachment-chips" hidden></div>
+                <div class="input-bar">
+                    <button id="attach-button" class="btn-attach" aria-label="Attach files">
+                        <i class="ph ph-paperclip"></i>
+                    </button>
+                    <input type="file" id="attach-input" multiple
+                        accept="image/*,application/pdf,text/*,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.csv,.json,.md" hidden>
+                    <input type="text" id="message-input" placeholder="Message or ask Beatrice..." autocomplete="off">
+                    <button id="send-button" class="btn-send" aria-label="Send message">
+                        <i class="ph-fill ph-paper-plane-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <button id="mic-button" class="nav-btn" aria-label="Toggle microphone">
+                    <i id="mic-icon" class="ph-fill ph-microphone"></i>
+                    <div class="mic-visualizer" id="mic-visualizer" aria-hidden="true">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <span>Mic</span>
+                </button>
+                <button id="camera-button" class="nav-btn" aria-label="Toggle camera">
+                    <i id="camera-icon" class="ph ph-video-camera"></i>
+                    <span>Camera</span>
+                </button>
+                <button id="screen-button" class="nav-btn" aria-label="Toggle screen share">
+                    <i id="screen-icon" class="ph ph-screencast"></i>
+                    <span>Share</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Authentication screen — shown until Firebase resolves the user -->
+        <div id="auth-screen" class="auth-screen" aria-hidden="false">
+            <div class="auth-bg-glow"></div>
+            <div class="auth-card">
+                <img class="auth-logo" src="https://eburon.ai/icon-eburon.svg" alt="Eburon">
+                <h1 class="auth-title">Eburon AI</h1>
+                <p class="auth-subtitle" id="auth-subtitle">Sign in to start automating</p>
+
+                <form id="auth-form" class="auth-form" novalidate>
+                    <label class="auth-field auth-field-name">
+                        <span class="auth-field-label">Name</span>
+                        <input type="text" id="auth-name" placeholder="Your name" autocomplete="name">
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Email</span>
+                        <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" required>
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Password</span>
+                        <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password"
+                            required>
+                    </label>
+                    <label class="auth-field auth-field-confirm">
+                        <span class="auth-field-label">Confirm Password</span>
+                        <input type="password" id="auth-confirm-password" placeholder="••••••••"
+                            autocomplete="new-password">
+                    </label>
+                    <button type="submit" id="auth-submit" class="auth-submit">
+                        <span class="auth-submit-text">Sign in</span>
+                        <i class="ph ph-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="auth-divider"><span>or</span></div>
+
+                <button id="auth-google" class="auth-google" type="button">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <path fill="#4285F4"
+                            d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                        <path fill="#34A853"
+                            d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                        <path fill="#FBBC05"
+                            d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" />
+                        <path fill="#EA4335"
+                            d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                    </svg>
+                    <span>Continue with Google</span>
+                </button>
+
+                <button id="auth-google-redirect" class="auth-redirect" type="button">
+                    Open Google sign-in full page
+                </button>
+
+                <button id="auth-toggle-mode" class="auth-toggle" type="button">
+                    Don't have an account? <strong>Sign up</strong>
+                </button>
+
+                <button id="auth-forgot" class="auth-forgot" type="button">Forgot password?</button>
+
+                <div id="auth-error" class="auth-error" role="alert"></div>
+            </div>
+        </div>
+
+        <!-- Compatibility panels used by existing runtime methods. The second-row icons now open full pages first. -->
+        <div id="settings-panel" class="settings-panel" aria-hidden="true">
+            <div class="settings-header">
+                <button id="settings-close" class="settings-close-btn" type="button" aria-label="Close settings">
+                    <i class="ph ph-x"></i>
+                </button>
+                <span class="settings-title">Settings</span>
+                <button id="settings-save" class="settings-save-btn" type="button">Save</button>
+            </div>
+            <div class="settings-scroll">
+                <section class="settings-section">
+                    <h3 class="settings-section-title">
+                        <span class="settings-icon-tile tile-persona"><i class="ph-duotone ph-user-circle"></i></span>
+                        Persona
+                    </h3>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Your name</span>
+                        <input id="setting-user-name" type="text" placeholder="Boss">
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Assistant name</span>
+                        <input id="setting-agent-name" type="text" placeholder="Beatrice">
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Behavior</span>
+                        <textarea id="setting-persona" rows="4" placeholder="Tone and behavior preference"></textarea>
+                    </label>
+                    <div class="persona-presets">
+                        <button class="persona-preset" type="button" data-persona="warm">Warm</button>
+                        <button class="persona-preset" type="button" data-persona="professional">Professional</button>
+                        <button class="persona-preset" type="button" data-persona="playful">Playful</button>
+                        <button class="persona-preset" type="button" data-persona="concise">Concise</button>
+                    </div>
+                </section>
+                <section class="settings-section">
+                    <h3 class="settings-section-title">
+                        <span class="settings-icon-tile tile-kb"><i class="ph-duotone ph-books"></i></span>
+                        Knowledge
+                    </h3>
+                    <p class="settings-hint">Upload text, Markdown, JSON, CSV, PDF, or DOCX files. Indexed text is
+                        injected into Beatrice context.</p>
+                    <button id="kb-upload-btn" class="settings-save-btn" type="button">Upload</button>
+                    <input id="kb-upload-input" type="file" multiple accept="text/*,.txt,.md,.csv,.json,.pdf,.docx"
+                        hidden>
+                    <div id="kb-list" class="kb-list"></div>
+                </section>
+                <section class="settings-section">
+                    <h3 class="settings-section-title">
+                        <span class="settings-icon-tile tile-google"><i class="ph-duotone ph-google-logo"></i></span>
+                        Google Services
+                    </h3>
+                    <p class="settings-hint">Connect Google services for enhanced automation capabilities.</p>
+                    <button id="google-reauth-btn" class="google-reauth" type="button">
+                        <i class="ph ph-google-logo"></i>
+                        <span>Re-authorize Google Services</span>
+                    </button>
+                    <div class="permission-grid">
+                        <div>Gmail <span id="gmail-status" class="permission-status disconnected">Not connected</span>
+                        </div>
+                        <div>Drive <span id="drive-status" class="permission-status disconnected">Not connected</span>
+                        </div>
+                        <div>Calendar <span id="calendar-status" class="permission-status disconnected">Not
+                                connected</span></div>
+                        <div>Tasks <span id="tasks-status" class="permission-status disconnected">Not connected</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div id="profile-panel" class="settings-panel profile-panel" aria-hidden="true">
+            <div class="settings-header">
+                <button id="profile-close" class="settings-close-btn" type="button" aria-label="Close profile">
+                    <i class="ph ph-x"></i>
+                </button>
+                <span class="settings-title">Profile</span>
+                <button id="profile-save" class="settings-save-btn" type="button">Save</button>
+            </div>
+            <div class="settings-scroll">
+                <section class="settings-section">
+                    <div class="profile-summary">
+                        <img id="profile-avatar" class="feature-avatar" src="assets/logo/logo.png" alt="">
+                        <div>
+                            <strong id="profile-display-name">—</strong>
+                            <p id="profile-email-display"></p>
+                            <button id="profile-avatar-edit" class="auth-redirect" type="button">Change avatar</button>
+                            <input id="profile-avatar-input" type="file" accept="image/*" hidden>
+                        </div>
+                    </div>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Name</span>
+                        <input id="profile-name" type="text" autocomplete="name">
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Email</span>
+                        <input id="profile-email" type="email" disabled>
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Birthday</span>
+                        <input id="profile-birthday" type="date">
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Bio</span>
+                        <textarea id="profile-bio" rows="4"></textarea>
+                    </label>
+                    <label class="auth-field">
+                        <span class="auth-field-label">Interests</span>
+                        <input id="profile-interest-input" type="text" placeholder="Press Enter to add">
+                    </label>
+                    <div id="profile-interests" class="interest-list"></div>
+                    <button id="profile-signout" class="profile-signout" type="button">
+                        <i class="ph ph-sign-out"></i>
+                        <span>Sign out</span>
+                    </button>
+                </section>
+            </div>
+        </div>
+
+        <div id="history-panel" class="settings-panel history-panel" aria-hidden="true">
+            <div class="settings-header">
+                <button id="history-close" class="settings-close-btn" type="button" aria-label="Close history">
+                    <i class="ph ph-x"></i>
+                </button>
+                <span class="settings-title">Conversation History</span>
+                <button id="history-new-session" class="settings-save-btn" type="button">New</button>
+            </div>
+            <div class="settings-scroll history-scroll">
+                <div id="history-sessions" class="history-sessions"></div>
+                <div id="history-empty" class="history-empty" hidden>
+                    <i class="ph ph-clock-counter-clockwise"></i>
+                    <p>No conversation history yet</p>
+                    <button id="history-start-chat" class="history-start-btn" type="button">Start a
+                        conversation</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="config-container" class="compat-hidden">
+            <select id="voice-select">
+                <option value="Puck">Puck</option>
+                <option value="Charon">Charon</option>
+                <option value="Kore">Kore</option>
+                <option value="Fenrir">Fenrir</option>
+                <option value="Fenrir">Fenrir</option>
+            </select>
+            <input type="number" id="sample-rate-input">
+            <textarea id="system-instruction"></textarea>
+            <button id="apply-config"></button>
+            <button class="preset-button" data-preset="friendly"></button>
+            <button class="preset-button" data-preset="professional"></button>
+            <button class="preset-button" data-preset="tired"></button>
+        </div>
+        <!-- Compatibility elements used by the existing app logic. Hidden from the modern UI. -->
+        <button id="theme-toggle" class="compat-hidden"></button>
+        <button id="config-toggle" class="compat-hidden"></button>
+        <div class="logs-wrapper compat-hidden hidden"><button id="toggle-logs"></button>
+            <div id="logs-container"></div>
+        </div>
+
+        <!-- PWA Install Banner -->
+        <div id="pwa-install-banner" class="pwa-install-banner hidden">
+            <div class="pwa-install-content">
+                <img src="assets/logo/logo.png" alt="Beatrice Logo" class="pwa-install-logo">
+                <div class="pwa-install-text">
+                    <div class="pwa-install-title">Install Beatrice</div>
+                    <div class="pwa-install-description">Install App for the best experience</div>
+                </div>
+                <div class="pwa-install-actions">
+                    <button id="pwa-install-dismiss" class="pwa-install-btn dismiss">Not now</button>
+                    <button id="pwa-install-confirm" class="pwa-install-btn confirm">Install</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voice Selection Modal -->
+        <script src="js/config/env.js"></script>
+        <script src="js/main.js" type="module"></script>
+</body>
+
+</html>
