@@ -28,6 +28,11 @@ body {
     color: var(--text-main);
 }
 
+#video-container,
+#screen-container {
+    display: none;
+}
+
 button, input { font: inherit; }
 button:disabled, input:disabled { opacity: 0.55; cursor: not-allowed; }
 
